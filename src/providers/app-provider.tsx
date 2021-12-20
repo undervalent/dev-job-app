@@ -1,7 +1,7 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, lightTheme, darkTheme } from "../lib/styles";
-import { useAppSelector } from "../hooks";
+import { useAppSelector } from "../state/hooks";
 
 interface ProviderProps {
   children: React.ReactNode;

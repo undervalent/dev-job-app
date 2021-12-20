@@ -11,20 +11,26 @@ export const Wrapper = styled.header`
   align-items: flex-start;
   padding: 3.2rem 2.4rem;
   height: 13.6rem;
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
   background-image: url(${smallBackground});
-  ${media.greaterThan("medium")`
-  background-image: url(${mediumBackground});
-  `}
-  ${media.greaterThan("large")`
-  background-image: url(${largeBackground});
-  `}
 
   .header-container {
     display: flex;
     flex: 1;
     align-items: flex-start;
     justify-content: space-between;
+  }
+  ${media.greaterThan("medium")`
+   background-image: url(${mediumBackground});
+  .header-container {
+    max-width: 68.9rem;
+  }
+  `}
+  ${media.greaterThan("large")`
+    background-image: url(${largeBackground});
+    .header-container {
     max-width: 111rem;
   }
-  
+  `}
 `;

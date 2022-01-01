@@ -19,3 +19,14 @@ export interface IJob {
     items: string[];
   };
 }
+
+export interface ISelectOption {
+  value: any;
+  label: any;
+}
+
+export interface IFilterState {
+  fullTime: boolean;
+  searchQuery: string;
+  location: string[];
+}

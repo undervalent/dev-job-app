@@ -74,6 +74,8 @@ export const lightTheme = {
   secondaryBtnBackground: "#EEEFFD",
   secondaryBtnBackgroundHover: "#C5C9F5",
   secondaryBtnText: " #5964E0",
+  checkBoxBG: "#E7E8E9",
+  checkBoxSelectedBG: "var(--primary-alpha)",
 };
 export const darkTheme = {
   background: "var(--dark-bravo)",
@@ -83,4 +85,6 @@ export const darkTheme = {
   secondaryBtnBackground: "#303642",
   secondaryBtnBackgroundHover: "#696E76",
   secondaryBtnText: "#fff",
+  checkBoxBG: "#313743",
+  checkBoxSelectedBG: "var(--primary-alpha)",
 };

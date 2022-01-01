@@ -1,13 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import jobListData from "../../lib/data/data";
-import { IJob } from "../../lib/types";
-
+import { IJob, ISelectOption } from "../../lib/types";
+import { generateSelectOptions } from "../utils";
 export interface JobListState {
   jobList: IJob[];
+  locations: ISelectOption[];
+  positions: ISelectOption[];
 }
 
 const initialState: JobListState = {
   jobList: jobListData,
+  locations: generateSelectOptions(jobListData, "location"),
+  positions: generateSelectOptions(jobListData, "position"),
 };
 
 export const jobListSlice = createSlice({

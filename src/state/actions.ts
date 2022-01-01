@@ -1,7 +1,6 @@
-import { selectedInvoiceSlice } from "./features/selected-invoice";
 import { themeSlice } from "./features/theme";
-
+import { filterSlice } from "./features/filtered";
 export const availableActions = {
   theme: themeSlice.actions,
-  selectedInvoice: selectedInvoiceSlice.actions,
+  filters: filterSlice.actions,
 };

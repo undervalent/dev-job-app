@@ -19,7 +19,7 @@ export const SelectedJob = () => {
   const { jobList } = useAppSelector((state) => state.jobList);
   const job = id ? jobList.find((el) => el.id === parseInt(id)) : null;
   if (!id) return <>This invoice doesn't exist!</>;
-  if (!job) return null;
+  if (!job) return <>This Job doesn't exist!</>;
   const {
     company,
     website,

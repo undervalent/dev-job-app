@@ -14,16 +14,12 @@ export const Checkbox: React.FC<IProps> = ({
 }) => {
   return (
     <Wrapper isSelected={isSelected}>
-      {/* <!-- The real checkbox --> */}
       <input
         type="checkbox"
         className="label__input"
         onClick={onCheckboxChange}
       />
-
-      {/* <!-- The fake square --> */}
       <div className="label__square">
-        {/* <!-- The inner square --> */}
         <div className="label__checkbox">
           {isSelected && <img src={CheckMark} alt="checkmark" />}
         </div>

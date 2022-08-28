@@ -14,10 +14,15 @@ import { useAppSelector } from "../../state";
 import { Button, LogoItem } from "../../shared-components";
 import { ContentWrapper } from "../../lib/styles";
 
+
 export const SelectedJob = () => {
   const { id } = useParams();
-  const { jobList } = useAppSelector((state) => state.jobList);
-  const job = id ? jobList.find((el) => el.id === parseInt(id)) : null;
+  const { entities } = useAppSelector((state) => {
+    return {
+      entities: state.jobList.jobList.entities,
+    };
+  });
+  const job = id ? entities[id] : null;
   if (!id) return <>This invoice doesn't exist!</>;
   if (!job) return <>This Job doesn't exist!</>;
   const {
@@ -48,7 +53,7 @@ export const SelectedJob = () => {
       <h4 className="subhead">Requirements</h4>
       <p>{requirements.content}</p>
       <UnorderedList>
-        {requirements.items.map((el) => (
+        {requirements.items.map((el: string) => (
           <li key={el}>{el}</li>
         ))}
       </UnorderedList>
@@ -60,7 +65,7 @@ export const SelectedJob = () => {
       <h4 className="subhead">What you will do</h4>
       <p>{role.content}</p>
       <OrderedList>
-        {role.items.map((el) => (
+        {role.items.map((el: string) => (
           <li key={el}>{el}</li>
         ))}
       </OrderedList>

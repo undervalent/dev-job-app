@@ -1,17 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 import jobListData from "../../lib/data/data";
-import { IJob, ISelectOption } from "../../lib/types";
-import { generateSelectOptions } from "../utils";
+import { IJob } from "../../lib/types";
+
+const jobsAdapter = createEntityAdapter<IJob>({
+  // Assume IDs are stored in a field other than `job.id`
+  // selectId: (job) => job.id,
+  // Keep the "all IDs" array sorted based on book titles
+  sortComparer: (a, b) => a.location.localeCompare(b.location),
+});
+
+const emptyInitialState = jobsAdapter.getInitialState();
+const filledState = jobsAdapter.upsertMany(emptyInitialState, jobListData);
+
 export interface JobListState {
-  jobList: IJob[];
-  locations: ISelectOption[];
-  positions: ISelectOption[];
+  entities: IJob[];
+  ids: number;
 }
 
-const initialState: JobListState = {
-  jobList: jobListData,
-  locations: generateSelectOptions(jobListData, "location"),
-  positions: generateSelectOptions(jobListData, "position"),
+const initialState: any = {
+  jobList: filledState,
 };
 
 export const jobListSlice = createSlice({

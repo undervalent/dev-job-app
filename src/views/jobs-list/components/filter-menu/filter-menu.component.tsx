@@ -1,50 +1,86 @@
 import React from "react";
-import Select from "react-select";
 
-import { Wrapper } from "./filter-menu.styles";
-import { Button, Checkbox } from "../../../../shared-components";
+import { Wrapper, SearchInput, ButtonOverwrite } from "./filter-menu.styles";
+import { Checkbox } from "../../../../shared-components";
 import { useAppDispatch, useAppSelector } from "../../../../state";
+import { SelectMenu } from "../select-menu";
 import {
   toggleFullTime,
   setSearchQuery,
-  setLocation,
 } from "../../../../state/features/filtered";
-
-export const FilterMenu = () => {
+import { useWindowSize } from "../../../../lib/hooks";
+function useFilterData(): [
+  {
+    searchQuery: string;
+    fullTime: boolean;
+    label: string;
+    isMobile: boolean;
+  },
+  {
+    handleSearch(e: React.ChangeEvent<HTMLInputElement>): void;
+    handleFullTime(): void;
+  }
+] {
   const dispatch = useAppDispatch();
 
-  const { locations, fullTime, searchQuery } = useAppSelector((state) => ({
+  const { fullTime, searchQuery } = useAppSelector((state) => ({
     fullTime: state.filter.fullTime,
     searchQuery: state.filter.searchQuery,
-    locations: state.jobList.locations,
   }));
+  const { width } = useWindowSize();
+  const handlers = React.useMemo(
+    () => ({
+      handleFullTime: () => dispatch(toggleFullTime()),
+      handleSearch: (e: React.ChangeEvent<HTMLInputElement>) =>
+        dispatch(setSearchQuery(e.target.value)),
+    }),
+    [dispatch]
+  );
+  const mobile = !!width && width <= 1024;
 
-  const handleFullTime = () => dispatch(toggleFullTime());
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
-    dispatch(setSearchQuery(e.target.value));
-  const handleLocation = (option: any) => {
-    const value = option && option.value ? [option.value] : [];
-    dispatch(setLocation(value));
+  const state = {
+    fullTime,
+    searchQuery,
+    label: mobile ? "Full Time" : "Full Time Only",
+    isMobile: mobile,
   };
+  return [state, handlers];
+}
+
+export const FilterMenu = () => {
+  const [
+    { searchQuery, fullTime, label, isMobile },
+    { handleSearch, handleFullTime },
+  ] = useFilterData();
   return (
     <Wrapper>
       <div className="divider">
         <div className="content">
-          <input type="search" onChange={handleSearch} value={searchQuery} />
+          <SearchInput
+            type="search"
+            onChange={handleSearch}
+            value={searchQuery}
+          />
         </div>
       </div>
-      <div className="divider">
-        <div className="content2">
-          <Select isClearable options={locations} onChange={handleLocation} />
+      {!isMobile && (
+        <div className="divider">
+          <div className="content2">
+            <SelectMenu />
+          </div>
         </div>
-      </div>
+      )}
       <div className="last-divider">
-        <Checkbox
-          label="Full Time Only"
-          isSelected={fullTime}
-          onCheckboxChange={handleFullTime}
-        />
-        <Button purpose="primary">Search</Button>
+        {!isMobile && (
+          <Checkbox
+            label={label}
+            isSelected={fullTime}
+            onCheckboxChange={handleFullTime}
+          />
+        )}
+        <ButtonOverwrite purpose="primary" data-something="blah">
+          Search
+        </ButtonOverwrite>
       </div>
     </Wrapper>
   );

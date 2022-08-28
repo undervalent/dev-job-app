@@ -1,18 +1,24 @@
 import { IJob, IFilterState } from "../../../lib/types";
 
-export const filterJobList = (jobList: IJob[], filterOptions: IFilterState) => {
+// IJob[]
+
+export const filterJobList = (
+  jobList: number[],
+  entities: { [index: number]: IJob },
+  filterOptions: IFilterState
+) => {
   const { fullTime, searchQuery, location } = filterOptions;
   let output = [...jobList];
 
   if (fullTime) {
-    output = output.filter((el) => el.contract === "Full Time");
+    output = output.filter((el) => entities[el].contract === "Full Time");
   }
   if (location.length) {
-    output = output.filter((el) => location.includes(el.location));
+    output = output.filter((el) => location.includes(entities[el].location));
   }
   if (searchQuery) {
     output = output.filter((el) =>
-      el.position.toLowerCase().includes(searchQuery.toLowerCase())
+      entities[el].position.toLowerCase().includes(searchQuery.toLowerCase())
     );
   }
   return output;

@@ -7,13 +7,18 @@ import { ContentWrapper } from "../../lib/styles";
 import { filterJobList } from "./utils";
 
 export const JobsList = () => {
-  const { jobList, filter } = useAppSelector(({ filter, jobList }) => ({
-    jobList: jobList.jobList,
-    filter,
-  }));
+  const { jobList, filter, entities } = useAppSelector(
+    ({ filter, jobList }) => {
+      return {
+        jobList: jobList.jobList.ids,
+        entities: jobList.jobList.entities,
+        filter,
+      };
+    }
+  );
 
-  const renderList = filterJobList(jobList, filter).map((job) => (
-    <JobItem key={job.id} jobData={job} />
+  const renderList = filterJobList(jobList, entities, filter).map((job) => (
+    <JobItem key={job} jobData={entities[job]} />
   ));
   return (
     <ContentWrapper>

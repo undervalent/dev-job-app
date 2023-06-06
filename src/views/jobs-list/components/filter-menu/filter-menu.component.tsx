@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Wrapper, SearchInput, ButtonOverwrite } from "./filter-menu.styles";
+import { Wrapper, SearchInput } from "./filter-menu.styles";
 import { Checkbox } from "../../../../shared-components";
 import { useAppDispatch, useAppSelector } from "../../../../state";
 import { SelectMenu } from "../select-menu";
@@ -54,34 +54,13 @@ export const FilterMenu = () => {
   ] = useFilterData();
   return (
     <Wrapper>
-      <div className="divider">
-        <div className="content">
-          <SearchInput
-            type="search"
-            onChange={handleSearch}
-            value={searchQuery}
-          />
-        </div>
-      </div>
-      {!isMobile && (
-        <div className="divider">
-          <div className="content2">
-            <SelectMenu />
-          </div>
-        </div>
-      )}
-      <div className="last-divider">
-        {!isMobile && (
-          <Checkbox
-            label={label}
-            isSelected={fullTime}
-            onCheckboxChange={handleFullTime}
-          />
-        )}
-        <ButtonOverwrite purpose="primary" data-something="blah">
-          Search
-        </ButtonOverwrite>
-      </div>
+      <SearchInput type="search" onChange={handleSearch} value={searchQuery} />
+      <SelectMenu />
+      <Checkbox
+        label={label}
+        isSelected={fullTime}
+        onCheckboxChange={handleFullTime}
+      />
     </Wrapper>
   );
 };

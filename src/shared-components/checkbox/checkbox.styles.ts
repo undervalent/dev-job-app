@@ -9,11 +9,6 @@ export const Wrapper = styled.label<IProps>`
   display: inline-flex;
   cursor: pointer;
 
-  .label__input {
-    /* Hide it */
-    display: none;
-  }
-
   .label__square {
     border-radius: 4px;
     width: 2.4rem;
@@ -41,4 +36,8 @@ export const Wrapper = styled.label<IProps>`
     color: ${({ theme }) => theme.headers};
     margin-left: 1.6rem;
   }
+`;
+
+export const Checkbox = styled.input`
+  opacity: 0;
 `;

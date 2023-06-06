@@ -14,12 +14,11 @@ import { useAppSelector } from "../../state";
 import { Button, LogoItem } from "../../shared-components";
 import { ContentWrapper } from "../../lib/styles";
 
-
 export const SelectedJob = () => {
   const { id } = useParams();
   const { entities } = useAppSelector((state) => {
     return {
-      entities: state.jobList.jobList.entities,
+      entities: state.jobList.entities,
     };
   });
   const job = id ? entities[id] : null;

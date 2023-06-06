@@ -10,16 +10,16 @@ const jobsAdapter = createEntityAdapter<IJob>({
 });
 
 const emptyInitialState = jobsAdapter.getInitialState();
-const filledState = jobsAdapter.upsertMany(emptyInitialState, jobListData);
+const initialState = jobsAdapter.upsertMany(emptyInitialState, jobListData);
 
 export interface JobListState {
-  entities: IJob[];
-  ids: number;
+  entities: IJob;
+  ids: number[];
 }
 
-const initialState: any = {
-  jobList: filledState,
-};
+// const initialState: any = {
+//   jobList: filledState,
+// };
 
 export const jobListSlice = createSlice({
   name: "job-list",

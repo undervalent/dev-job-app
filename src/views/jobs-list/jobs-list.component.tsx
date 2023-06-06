@@ -6,20 +6,29 @@ import { JobItem } from "./components/job-item";
 import { ContentWrapper } from "../../lib/styles";
 import { filterJobList } from "./utils";
 
-export const JobsList = () => {
+function useJobData() {
   const { jobList, filter, entities } = useAppSelector(
     ({ filter, jobList }) => {
       return {
-        jobList: jobList.jobList.ids,
-        entities: jobList.jobList.entities,
+        jobList: jobList.ids,
+        entities: jobList.entities,
         filter,
       };
     }
   );
+  const filteredList = filterJobList(jobList, entities, filter).map(
+    (job) => entities[job]
+  );
 
-  const renderList = filterJobList(jobList, entities, filter).map((job) => (
-    <JobItem key={job} jobData={entities[job]} />
-  ));
+  return filteredList;
+}
+
+export const JobsList = () => {
+  const filteredList = useJobData();
+
+  const renderList = filteredList.map((job) => {
+    return job ? <JobItem key={job.id} jobData={job} /> : null;
+  });
   return (
     <ContentWrapper>
       <Wrapper>

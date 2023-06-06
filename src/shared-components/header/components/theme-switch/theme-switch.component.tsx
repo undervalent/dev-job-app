@@ -20,7 +20,8 @@ export const ThemeSwitch = () => {
       <SwitchWrapper isChecked={isChecked}>
         <input
           type="checkbox"
-          className="label__input"
+          id="theme"
+          className="visually-hidden"
           checked={isChecked}
           onChange={handleClick}
           aria-label="theme toggle"

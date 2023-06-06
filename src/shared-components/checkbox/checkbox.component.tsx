@@ -1,5 +1,5 @@
 import React from "react";
-import { Wrapper } from "./checkbox.styles";
+import { Wrapper, Checkbox as StyledCheckbox } from "./checkbox.styles";
 import CheckMark from "../../assets/desktop/icon-check.svg";
 interface IProps {
   label: string;
@@ -13,12 +13,8 @@ export const Checkbox: React.FC<IProps> = ({
   onCheckboxChange,
 }) => {
   return (
-    <Wrapper isSelected={isSelected}>
-      <input
-        type="checkbox"
-        className="label__input"
-        onClick={onCheckboxChange}
-      />
+    <Wrapper isSelected={isSelected} htmlFor={label}>
+      <StyledCheckbox type="checkbox" onClick={onCheckboxChange} id={label} />
       <div className="label__square">
         <div className="label__checkbox">
           {isSelected && <img src={CheckMark} alt="checkmark" />}

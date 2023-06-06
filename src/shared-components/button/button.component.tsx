@@ -5,6 +5,7 @@ interface IButtonProps {
   label?: string;
   width?: number;
   href?: string;
+  children: React.ReactNode;
   purpose: "primary" | "secondary";
 }
 

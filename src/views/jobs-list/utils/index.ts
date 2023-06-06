@@ -1,10 +1,8 @@
-import { IJob, IFilterState } from "../../../lib/types";
-
-// IJob[]
+import { IFilterState } from "../../../lib/types";
 
 export const filterJobList = (
-  jobList: number[],
-  entities: { [index: number]: IJob },
+  jobList: any[],
+  entities: any,
   filterOptions: IFilterState
 ) => {
   const { fullTime, searchQuery, location } = filterOptions;

@@ -1,9 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { themeSlice } from "./features/theme";
+import { jobListSlice } from "./features/job-list";
+import { filterSlice } from "./features/filtered";
+import { dropdownListSlice } from "./features/dropdowns";
+
 export const store = configureStore({
   reducer: {
     theme: themeSlice.reducer,
+    jobList: jobListSlice.reducer,
+    filter: filterSlice.reducer,
+    dropdowns: dropdownListSlice.reducer,
   },
+  devTools: true,
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

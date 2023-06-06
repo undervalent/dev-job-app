@@ -48,10 +48,8 @@ function useFilterData(): [
 }
 
 export const FilterMenu = () => {
-  const [
-    { searchQuery, fullTime, label, isMobile },
-    { handleSearch, handleFullTime },
-  ] = useFilterData();
+  const [{ searchQuery, fullTime, label }, { handleSearch, handleFullTime }] =
+    useFilterData();
   return (
     <Wrapper>
       <SearchInput type="search" onChange={handleSearch} value={searchQuery} />

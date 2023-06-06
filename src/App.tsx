@@ -1,10 +1,21 @@
 import React from "react";
-import { Header } from "./components";
+import { Route, Routes } from "react-router-dom";
+
+import { Header } from "./shared-components";
+import { MainContent } from "./App.styles";
+import { JobsList } from "./views";
+import { SelectedJob } from "./views/selected-job";
+
 function App() {
   return (
     <>
       <Header />
-      <h1>App</h1>
+      <MainContent>
+        <Routes>
+          <Route path="/" element={<JobsList />} />
+          <Route path="/selected-job/:id" element={<SelectedJob />} />
+        </Routes>
+      </MainContent>
     </>
   );
 }

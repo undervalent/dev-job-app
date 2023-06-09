@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import media from "styled-media-query";
 
 export const Wrapper = styled.div`
   border-radius: 6px;
@@ -12,10 +13,4 @@ export const Wrapper = styled.div`
   min-width: 100%;
   align-items: center;
   gap: 1rem;
-`;
-
-export const SearchInput = styled.input`
-  background: none;
-  border: none;
-  height: 100%;
 `;

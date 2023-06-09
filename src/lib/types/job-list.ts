@@ -28,5 +28,6 @@ export interface ISelectOption {
 export interface IFilterState {
   fullTime: boolean;
   searchQuery: string;
+  locationQuery: string;
   location: string[];
 }

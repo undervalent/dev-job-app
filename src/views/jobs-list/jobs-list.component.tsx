@@ -5,27 +5,19 @@ import { useAppSelector } from "../../state/hooks";
 import { JobItem } from "./components/job-item";
 import { ContentWrapper } from "../../lib/styles";
 import { filterJobList } from "./utils";
+import { getFilteredJobList, getEntities } from "../../state/features/job-list";
 
 function useJobData() {
-  const { jobList, filter, entities } = useAppSelector(
-    ({ filter, jobList }) => {
-      return {
-        jobList: jobList.ids,
-        entities: jobList.entities,
-        filter,
-      };
-    }
-  );
-  const filteredList = filterJobList(jobList, entities, filter).map(
-    (job) => entities[job]
-  );
+  const filteredList = useAppSelector(getFilteredJobList);
+  // const filteredList = filterJobList(jobList, entities, filter).map(
+  //   (job) => entities[job]
+  // );
 
   return filteredList;
 }
 
 export const JobsList = () => {
-  const filteredList = useJobData();
-
+  const filteredList = useAppSelector(getFilteredJobList);
   const renderList = filteredList.map((job) => {
     return job ? <JobItem key={job.id} jobData={job} /> : null;
   });

@@ -1,5 +1,7 @@
 import React from "react";
-import { Wrapper, Checkbox as StyledCheckbox } from "./checkbox.styles";
+import * as RadixCheckbox from "@radix-ui/react-checkbox";
+import * as Styled from "./checkbox.styles";
+
 import CheckMark from "../../assets/desktop/icon-check.svg";
 interface IProps {
   label: string;
@@ -13,14 +15,18 @@ export const Checkbox: React.FC<IProps> = ({
   onCheckboxChange,
 }) => {
   return (
-    <Wrapper isSelected={isSelected} htmlFor={label}>
-      <StyledCheckbox type="checkbox" onClick={onCheckboxChange} id={label} />
-      <div className="label__square">
-        <div className="label__checkbox">
-          {isSelected && <img src={CheckMark} alt="checkmark" />}
-        </div>
-      </div>
-      <span className="label__text">{label}</span>
-    </Wrapper>
+    <Styled.Container isSelected={isSelected}>
+      <Styled.CheckboxRoot
+        isSelected={isSelected}
+        checked={isSelected}
+        id="checkbox"
+        onCheckedChange={onCheckboxChange}
+      >
+        <RadixCheckbox.Indicator>
+          {isSelected && <img src={CheckMark} alt="check mark" />}
+        </RadixCheckbox.Indicator>
+      </Styled.CheckboxRoot>
+      <Styled.Label htmlFor="checkbox">{label}</Styled.Label>
+    </Styled.Container>
   );
 };

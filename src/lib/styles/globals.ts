@@ -27,9 +27,11 @@ ${CSSReset}
   --border-radius: .6rem;
 }
   body {
-    background: ${({ theme }: GlobalThemeProps) => theme.background};
+    background: ${({ theme }) => theme.background};
     color: ${({ theme }: GlobalThemeProps) => theme.text};
     transition: background 0.2s ease-in, color 0.2s ease-in;
+    font-size: 1.6rem;
+    line-height: 2.6rem;
   }
 
 h1,

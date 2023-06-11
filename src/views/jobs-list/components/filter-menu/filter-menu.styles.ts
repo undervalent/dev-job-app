@@ -10,7 +10,16 @@ export const Wrapper = styled.div`
   align-items: stretch;
   justify-content: space-between;
   background: ${({ theme }) => theme.elementBackground};
-  min-width: 100%;
+  width: 100%;
   align-items: center;
   gap: 1rem;
+`;
+
+export const MenuWrapper = styled.div`
+  display: flex;
+  gap: 1.5rem;
+`;
+
+export const ButtonContainer = styled.div`
+  max-width: 4.8rem;
 `;

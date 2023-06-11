@@ -10,7 +10,8 @@ export const Input = styled.input`
   border-radius: 0.4rem;
   font-size: 1.5rem;
   color: black;
-  background-color: ${({ theme }) => theme.background};
+  caret-color: ${({ theme }) => theme.colors.violet};
+  background-color: trasnparent;
   height: 2.4rem;
   line-height: 1;
   &::selection {

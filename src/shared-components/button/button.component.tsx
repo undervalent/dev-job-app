@@ -7,6 +7,7 @@ interface IButtonProps {
   href?: string;
   children: React.ReactNode;
   purpose: "primary" | "secondary";
+  onClick?(): void;
 }
 
 export const Button: React.FC<IButtonProps> = ({
@@ -15,6 +16,7 @@ export const Button: React.FC<IButtonProps> = ({
   purpose,
   width,
   href,
+  onClick,
 }) => {
   if (href) {
     return (
@@ -24,7 +26,7 @@ export const Button: React.FC<IButtonProps> = ({
     );
   }
   return (
-    <Wrapper purpose={purpose} width={width}>
+    <Wrapper purpose={purpose} width={width} onClick={onClick}>
       {children}
     </Wrapper>
   );

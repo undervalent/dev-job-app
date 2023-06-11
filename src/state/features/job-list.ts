@@ -2,11 +2,13 @@ import {
   createSlice,
   createEntityAdapter,
   PayloadAction,
+  Dictionary,
+  EntityId,
 } from "@reduxjs/toolkit";
 import jobListData from "../../lib/data/data";
 import { IJob } from "../../lib/types";
 import { RootState } from "../store";
-
+import { generateFilteredJobList } from "../utils/index";
 const jobsAdapter = createEntityAdapter<IJob>({
   // Assume IDs are stored in a field other than `job.id`
   // selectId: (job) => job.id,
@@ -18,16 +20,14 @@ const emptyInitialState = jobsAdapter.getInitialState();
 const initialState = jobsAdapter.upsertMany(emptyInitialState, jobListData);
 
 export interface JobListState {
-  entities: IJob;
-  ids: number[];
+  entities: Dictionary<IJob>;
+  ids: EntityId[];
   fullTime: boolean;
   searchQuery: string;
   locationQuery: string;
+  filteredJobList?: EntityId[];
+  showCount?: number;
 }
-
-// const initialState: any = {
-//   jobList: filledState,
-// };
 
 export const jobListSlice = createSlice({
   name: "jobList",
@@ -37,6 +37,8 @@ export const jobListSlice = createSlice({
     searchQuery: "",
     location: [],
     locationQuery: "",
+    filteredJobList: initialState.ids,
+    showCount: 1,
   },
   reducers: {
     toggleFullTime: (state) => {
@@ -48,6 +50,19 @@ export const jobListSlice = createSlice({
     setLocationQuery: (state, { payload }: PayloadAction<string>) => {
       state.locationQuery = payload;
     },
+    updateShowCount: (state) => {
+      state.showCount = state.showCount + 1;
+    },
+    setFilteredJobList: (state) => {
+      state.filteredJobList = generateFilteredJobList({
+        ids: state.ids,
+        entities: state.entities,
+        searchQuery: state.searchQuery,
+        locationQuery: state.locationQuery,
+        fullTime: state.fullTime,
+      });
+      state.showCount = 1;
+    },
   },
 });
 
@@ -57,39 +72,20 @@ export const getLocationQuery = (state: RootState) =>
   state.jobList.locationQuery;
 
 export const getFilteredJobList = (state: RootState) => {
-  const { ids, entities, fullTime, searchQuery, locationQuery } = state.jobList;
-
-  let filteredIds = [...ids];
-
-  if (entities === undefined) return [];
-
-  if (fullTime) {
-    filteredIds = filteredIds.filter(
-      (el) => entities?.[el]?.contract === "Full Time"
-    );
-  }
-  if (locationQuery.length) {
-    filteredIds = filteredIds.filter((el) =>
-      entities?.[el]?.location
-        .toLowerCase()
-        .includes(locationQuery.toLowerCase())
-    );
-  }
-  if (searchQuery.length) {
-    filteredIds = filteredIds.filter((el) => {
-      const query = searchQuery.toLowerCase();
-      return (
-        entities?.[el]?.position.toLowerCase().includes(query) ||
-        entities?.[el]?.description.toLowerCase().includes(query) ||
-        entities?.[el]?.company.toLowerCase().includes(query)
-      );
-    });
-  }
-
-  return filteredIds.map((jobId) => entities[jobId]);
+  const { entities, filteredJobList, showCount } = state.jobList;
+  const count = showCount * 12;
+  return filteredJobList.map((id: any, idx: number) =>
+    idx < count ? entities[id] : null
+  );
 };
 export const getEntities = (state: RootState) => state.jobList.entities;
-export const { toggleFullTime, setSearchQuery, setLocationQuery } =
-  jobListSlice.actions;
+
+export const {
+  toggleFullTime,
+  setSearchQuery,
+  setLocationQuery,
+  setFilteredJobList,
+  updateShowCount,
+} = jobListSlice.actions;
 
 export default jobListSlice.reducer;

@@ -7,6 +7,7 @@ import {
   getIsFullTime,
   getSearchQuery,
   getLocationQuery,
+  setFilteredJobList,
 } from "../../../../state/features/job-list";
 
 import { useWindowSize } from "../../../../lib/hooks";
@@ -21,6 +22,7 @@ interface State {
 interface Handlers {
   handleSearch(e: React.ChangeEvent<HTMLInputElement>): void;
   handleLocation(e: React.ChangeEvent<HTMLInputElement>): void;
+  handleFilter(): void;
   handleFullTime(): void;
 }
 
@@ -38,10 +40,11 @@ export function useFilterData(): [State, Handlers] {
         dispatch(setSearchQuery(e.target.value)),
       handleLocation: (e: React.ChangeEvent<HTMLInputElement>) =>
         dispatch(setLocationQuery(e.target.value)),
+      handleFilter: () => dispatch(setFilteredJobList()),
     }),
     [dispatch]
   );
-  const mobile = !!width && width <= 1024;
+  const mobile = !!width && width <= 768;
 
   const state = {
     fullTime,

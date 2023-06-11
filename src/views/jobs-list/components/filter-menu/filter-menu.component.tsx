@@ -1,6 +1,6 @@
 import React from "react";
-import { Wrapper } from "./filter-menu.styles";
-import { Checkbox } from "../../../../shared-components";
+import * as Styled from "./filter-menu.styles";
+import { Button, Checkbox } from "../../../../shared-components";
 import { MdLocationPin, MdSearch } from "react-icons/md";
 import { useTheme } from "styled-components";
 
@@ -11,10 +11,10 @@ export const FilterMenu = () => {
   const theme: any = useTheme();
   const [
     { searchQuery, fullTime, label, isMobile, locationQuery },
-    { handleSearch, handleFullTime, handleLocation },
+    { handleSearch, handleFullTime, handleLocation, handleFilter },
   ] = useFilterData();
   return (
-    <Wrapper>
+    <Styled.Wrapper>
       <Input
         icon={<MdSearch size="30px" color={theme?.colors?.violet} />}
         type="search"
@@ -29,11 +29,18 @@ export const FilterMenu = () => {
         icon={<MdLocationPin size="30px" color={theme?.colors?.violet} />}
         placeholder="Filter by location..."
       />
-      <Checkbox
-        label={label}
-        isSelected={fullTime}
-        onCheckboxChange={handleFullTime}
-      />
-    </Wrapper>
+      <Styled.MenuWrapper>
+        <Checkbox
+          label={label}
+          isSelected={fullTime}
+          onCheckboxChange={handleFullTime}
+        />
+        <Styled.ButtonContainer>
+          <Button purpose="primary" onClick={handleFilter} width={48}>
+            Search
+          </Button>
+        </Styled.ButtonContainer>
+      </Styled.MenuWrapper>
+    </Styled.Wrapper>
   );
 };

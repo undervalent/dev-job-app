@@ -17,6 +17,7 @@ export const Wrapper = styled.button<IProps>`
   font-weight: bold;
   font-size: 1.6rem;
   line-height: 1.6rem;
+  min-width: ${({ width }) => (width ? `${width / 10}rem` : "100%")};
   cursor: pointer;
   &:hover {
     background: ${({ theme, purpose }) =>

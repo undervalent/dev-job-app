@@ -1,32 +1,34 @@
 import React from "react";
-import { Wrapper } from "./job-list.styles";
+import * as Styled from "./job-list.styles";
 import { FilterMenu } from "./components";
-import { useAppSelector } from "../../state/hooks";
+import { useAppSelector, useAppDispatch } from "../../state/hooks";
 import { JobItem } from "./components/job-item";
 import { ContentWrapper } from "../../lib/styles";
-import { filterJobList } from "./utils";
-import { getFilteredJobList, getEntities } from "../../state/features/job-list";
-
-function useJobData() {
-  const filteredList = useAppSelector(getFilteredJobList);
-  // const filteredList = filterJobList(jobList, entities, filter).map(
-  //   (job) => entities[job]
-  // );
-
-  return filteredList;
-}
+import {
+  getFilteredJobList,
+  updateShowCount,
+} from "../../state/features/job-list";
+import { Button } from "../../shared-components";
 
 export const JobsList = () => {
   const filteredList = useAppSelector(getFilteredJobList);
+  const dispatch = useAppDispatch();
+  const updateCount = () => dispatch(updateShowCount());
+
   const renderList = filteredList.map((job) => {
     return job ? <JobItem key={job.id} jobData={job} /> : null;
   });
   return (
     <ContentWrapper>
-      <Wrapper>
+      <Styled.Wrapper>
         <FilterMenu />
-        <div className="job-listings">{renderList}</div>
-      </Wrapper>
+        <Styled.Listings>{renderList}</Styled.Listings>
+      </Styled.Wrapper>
+      <Styled.ButtonWrapper>
+        <Button purpose="primary" width={48} onClick={updateCount}>
+          Load more
+        </Button>
+      </Styled.ButtonWrapper>
     </ContentWrapper>
   );
 };

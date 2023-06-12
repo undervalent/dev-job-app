@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import media from "styled-media-query";
 
 export const Wrapper = styled.div`
-  border-radius: 6px;
-  min-height: 8rem;
-  padding: 0 1.6rem;
+  border-radius: ${({ theme }) => theme.radius.medium};
+  min-height: ${({ theme }) => theme.spacing.size20};
+  padding: ${({ theme }) => ` ${theme.spacing.none}  ${theme.spacing.size4}`};
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: stretch;
@@ -17,9 +16,6 @@ export const Wrapper = styled.div`
 
 export const MenuWrapper = styled.div`
   display: flex;
-  gap: 1.5rem;
-`;
-
-export const ButtonContainer = styled.div`
-  max-width: 4.8rem;
+  gap: ${({ theme }) => theme.spacing.size4};
+  justify-content: end;
 `;

@@ -5,8 +5,10 @@ import { Header } from "./shared-components";
 import { MainContent } from "./App.styles";
 import { JobsList } from "./views";
 import { SelectedJob } from "./views/selected-job";
+import { useDevice } from "./lib/hooks";
 
 function App() {
+  useDevice();
   return (
     <>
       <Header />

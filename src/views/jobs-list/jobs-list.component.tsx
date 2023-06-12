@@ -25,7 +25,7 @@ export const JobsList = () => {
         <Styled.Listings>{renderList}</Styled.Listings>
       </Styled.Wrapper>
       <Styled.ButtonWrapper>
-        <Button purpose="primary" width={48} onClick={updateCount}>
+        <Button purpose="primary" width={141} onClick={updateCount}>
           Load more
         </Button>
       </Styled.ButtonWrapper>

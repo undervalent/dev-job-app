@@ -2,7 +2,7 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, GlobalStyles, lightTheme } from "../lib/styles";
 import { useAppSelector } from "../state/hooks";
-import { getTheme } from "../state/features/theme";
+import { getTheme } from "../state/features/ui";
 import { tokens } from "./design-tokens";
 
 interface ProviderProps {

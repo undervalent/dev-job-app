@@ -7,12 +7,11 @@ export const Input = styled.input`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.4rem;
-  font-size: 1.5rem;
-  color: black;
+  border-radius: ${({ theme }) => theme.radius.default};
+  font-size: ${({ theme }) => theme.fontSize.fontSize1};
   caret-color: ${({ theme }) => theme.colors.violet};
-  background-color: trasnparent;
-  height: 2.4rem;
+  background-color: transparent;
+  height: ${({ theme }) => theme.spacing.size6};
   line-height: 1;
   &::selection {
     color: ${({ theme }) => theme.text};

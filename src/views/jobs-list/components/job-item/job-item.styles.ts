@@ -8,8 +8,9 @@ export const Wrapper = styled.article<IWrapper>`
 
   background: ${({ theme }) => theme.elementBackground};
   position: relative;
-  padding: 5rem 3.2rem 3.2rem 3.2rem;
-  border-radius: var(--order-radius);
+  padding: ${({ theme }) =>
+    `${theme.spacing.size13} ${theme.spacing.size8} ${theme.spacing.size8}  ${theme.spacing.size8}`};
+  border-radius: var(--border-radius);
 
   .logo-wrapper {
     position: absolute;
@@ -17,10 +18,10 @@ export const Wrapper = styled.article<IWrapper>`
   }
   .position-text {
     text-decoration: none;
-    font-size: 2rem;
-    line-height: 2.12rem;
-    margin-top: 1.3rem;
-    margin-bottom: 1.7rem;
+    font-size: ${({ theme }) => theme.fontSize.fontSize3};
+    line-height: ${({ theme }) => theme.lineHeight.lineHeight2};
+    margin-top: ${({ theme }) => theme.spacing.size3};
+    margin-bottom: ${({ theme }) => theme.spacing.size4};
   }
   .position-text a {
     color: ${({ theme }) => theme.headers};
@@ -34,20 +35,20 @@ export const Wrapper = styled.article<IWrapper>`
     font-size: 1.8rem;
   }
   .info-text {
-    line-height: 1.6rem;
+    line-height: ${({ theme }) => theme.lineHeight.lineHeight2};
     display: block;
     order: -1;
   }
   .company-text {
-    line-height: 1.6rem;
+    line-height: ${({ theme }) => theme.lineHeight.lineHeight2};
     display: block;
   }
   .location-text {
-    font-weight: 700;
-    font-size: 1.4rem;
-    line-height: 1.4rem;
+    font-weight: ${({ theme }) => theme.fontWeight.bold};
+    font-size: ${({ theme }) => theme.fontSize.fontSize1};
+    line-height: ${({ theme }) => theme.lineHeight.lineHeight1};
     color: var(--primary-alpha);
     display: block;
-    margin-top: 4.5rem;
+    margin-top: ${({ theme }) => theme.spacing.size11};
   }
 `;

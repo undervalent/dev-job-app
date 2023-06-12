@@ -10,14 +10,17 @@ import {
   setFilteredJobList,
 } from "../../../../state/features/job-list";
 
-import { useWindowSize } from "../../../../lib/hooks";
+import { getUiValues } from "../../../../state/features/ui";
 
 interface State {
   searchQuery: string;
   locationQuery: string;
   fullTime: boolean;
-  label: string;
-  isMobile: boolean;
+  labels: {
+    checkboxLabel: string;
+    searchPlaceholder: string;
+    locationPlaceholder: string;
+  };
 }
 interface Handlers {
   handleSearch(e: React.ChangeEvent<HTMLInputElement>): void;
@@ -31,8 +34,8 @@ export function useFilterData(): [State, Handlers] {
   const fullTime = useAppSelector(getIsFullTime);
   const searchQuery = useAppSelector(getSearchQuery);
   const locationQuery = useAppSelector(getLocationQuery);
+  const uiValues = useAppSelector(getUiValues);
 
-  const { width } = useWindowSize();
   const handlers = React.useMemo(
     () => ({
       handleFullTime: () => dispatch(toggleFullTime()),
@@ -44,14 +47,12 @@ export function useFilterData(): [State, Handlers] {
     }),
     [dispatch]
   );
-  const mobile = !!width && width <= 768;
 
   const state = {
     fullTime,
     searchQuery,
-    label: mobile ? "Full Time" : "Full Time Only",
-    isMobile: mobile,
     locationQuery,
+    labels: uiValues,
   };
   return [state, handlers];
 }

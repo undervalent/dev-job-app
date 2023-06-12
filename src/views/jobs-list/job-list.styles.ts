@@ -7,18 +7,18 @@ export const Wrapper = styled.section`
 
 export const Listings = styled.div`
   display: grid;
-  grid-row-gap: 4.9rem;
-  margin-top: 5.7rem;
-  grid-column-gap: 3rem;
+  grid-row-gap: ${({ theme }) => theme.spacing.size12};
+  margin: ${({ theme }) => `${theme.spacing.size14} auto 0 auto`};
+  grid-column-gap: ${({ theme }) => theme.spacing.size8};
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 32.7rem));
+  justify-content: center;
 
   ${media.greaterThan("medium")`
-    grid-template-columns: 1fr 1fr;
-    margin-top: 7rem;
+    margin-top: ${({ theme }) => theme.spacing.size18};
   `}
 
   ${media.greaterThan("large")`
-    grid-template-columns: 1fr 1fr 1fr;
-    margin-top: 10.5rem;
+    margin-top: ${({ theme }) => theme.spacing.size100};
   `}
 `;
 
@@ -26,5 +26,5 @@ export const ButtonWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 3rem;
+  margin: ${({ theme }) => `${theme.spacing.size8} 0`};
 `;

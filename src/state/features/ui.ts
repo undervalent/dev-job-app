@@ -3,11 +3,13 @@ import { RootState } from "../store";
 export interface ThemeState {
   theme: "light" | "dark";
   deviceSize: "small" | "medium" | "large" | "huge";
+  isModalActive: boolean;
 }
 
 const initialState: ThemeState = {
   theme: "light",
   deviceSize: "medium",
+  isModalActive: false,
 };
 
 export const themeSlice = createSlice({
@@ -28,12 +30,28 @@ export const themeSlice = createSlice({
     setDeviceSize: (state, action) => {
       state.deviceSize = action.payload;
     },
+    toggleModal: (state) => {
+      state.isModalActive = !state.isModalActive;
+    },
+    closeModal: (state) => {
+      state.isModalActive = false;
+    },
+    openModal: (state) => {
+      state.isModalActive = true;
+    },
   },
 });
 
 export default themeSlice.reducer;
-export const { toggleTheme, setLightTheme, setDarkTheme, setDeviceSize } =
-  themeSlice.actions;
+export const {
+  toggleTheme,
+  setLightTheme,
+  setDarkTheme,
+  setDeviceSize,
+  toggleModal,
+  openModal,
+  closeModal,
+} = themeSlice.actions;
 
 export const getTheme = (state: RootState) => state.ui.theme;
 export const getDeviceSize = (state: RootState) => state.ui.deviceSize;
@@ -48,3 +66,4 @@ export const getUiValues = (state: RootState) => {
     locationPlaceholder: "Filter by location...",
   };
 };
+export const getIsModalActive = (state: RootState) => state.ui.isModalActive;

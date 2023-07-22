@@ -1,5 +1,7 @@
-import React from "react";
-import { useAppDispatch, useAppSelector } from "../../../../state";
+import * as React from "react";
+import { getUiValues } from "../../state/features/ui";
+import { useAppDispatch, useAppSelector } from "../../state";
+
 import {
   setSearchQuery,
   setLocationQuery,
@@ -8,9 +10,7 @@ import {
   getSearchQuery,
   getLocationQuery,
   setFilteredJobList,
-} from "../../../../state/features/job-list";
-
-import { getUiValues } from "../../../../state/features/ui";
+} from "../../state/features/job-list";
 
 interface State {
   searchQuery: string;

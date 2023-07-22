@@ -3,10 +3,9 @@ import * as Styled from "./filter-menu.styles";
 import { Button, Checkbox } from "../../../../shared-components";
 import { MdLocationPin, MdSearch } from "react-icons/md";
 import { useTheme } from "styled-components";
+import { useFilterData } from "../../../../lib/hooks";
 
 import { Input } from "../../../../shared-components/input";
-import { useFilterData } from "./hooks";
-
 export const FilterMenu = () => {
   const theme: any = useTheme();
   const [

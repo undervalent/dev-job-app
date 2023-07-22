@@ -52,6 +52,8 @@ export const tokens = {
     grayDark: "#6e8098",
     grayLight: "#f4f6f8",
     white: "#fff",
+    lightOverlay: "rgba(255,255,255,.8)",
+    darkOverlay: "rgba(0,0,0,.8)",
   },
   fontWeight: {
     regular: 400,

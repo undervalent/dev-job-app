@@ -1,39 +1,43 @@
 import React from "react";
-import { Wrapper } from "./filter-menu.styles";
-import { Checkbox } from "../../../../shared-components";
+import * as Styled from "./filter-menu.styles";
+import { Button, Checkbox } from "../../../../shared-components";
 import { MdLocationPin, MdSearch } from "react-icons/md";
 import { useTheme } from "styled-components";
+import { useFilterData } from "../../../../lib/hooks";
 
 import { Input } from "../../../../shared-components/input";
-import { useFilterData } from "./hooks";
-
 export const FilterMenu = () => {
   const theme: any = useTheme();
   const [
-    { searchQuery, fullTime, label, isMobile, locationQuery },
-    { handleSearch, handleFullTime, handleLocation },
+    { searchQuery, fullTime, labels, locationQuery },
+    { handleSearch, handleFullTime, handleLocation, handleFilter },
   ] = useFilterData();
   return (
-    <Wrapper>
+    <Styled.Wrapper>
       <Input
         icon={<MdSearch size="30px" color={theme?.colors?.violet} />}
         type="search"
         onChange={handleSearch}
         value={searchQuery}
-        placeholder="Filter by title, companies, expertise..."
+        placeholder={labels.searchPlaceholder}
       />
       <Input
         type="text"
         onChange={handleLocation}
         value={locationQuery}
         icon={<MdLocationPin size="30px" color={theme?.colors?.violet} />}
-        placeholder="Filter by location..."
+        placeholder={labels.locationPlaceholder}
       />
-      <Checkbox
-        label={label}
-        isSelected={fullTime}
-        onCheckboxChange={handleFullTime}
-      />
-    </Wrapper>
+      <Styled.MenuWrapper>
+        <Checkbox
+          label={labels.checkboxLabel}
+          isSelected={fullTime}
+          onCheckboxChange={handleFullTime}
+        />
+        <Button purpose="primary" onClick={handleFilter} width={48}>
+          Search
+        </Button>
+      </Styled.MenuWrapper>
+    </Styled.Wrapper>
   );
 };

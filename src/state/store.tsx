@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { themeSlice } from "./features/theme";
+import { themeSlice } from "./features/ui";
 import { jobListSlice } from "./features/job-list";
 
 export const store = configureStore({
   reducer: {
-    theme: themeSlice.reducer,
+    ui: themeSlice.reducer,
     jobList: jobListSlice.reducer,
   },
   devTools: true,

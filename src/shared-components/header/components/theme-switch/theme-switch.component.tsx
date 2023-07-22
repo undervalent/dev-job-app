@@ -2,12 +2,12 @@ import React from "react";
 
 import { SwitchWrapper, Wrapper } from "./theme-switch.styles";
 import { useAppDispatch, useAppSelector } from "../../../../state";
-import { toggleTheme } from "../../../../state/features/theme";
+import { toggleTheme } from "../../../../state/features/ui";
 import moon from "../../../../assets/desktop/icon-moon.svg";
 import sun from "../../../../assets/desktop/icon-sun.svg";
 
 export const ThemeSwitch = () => {
-  const { theme } = useAppSelector((state) => state.theme);
+  const theme = useAppSelector((state) => state.ui.theme);
   const dispatch = useAppDispatch();
   const handleClick = () => dispatch(toggleTheme());
   const isChecked = theme === "dark";

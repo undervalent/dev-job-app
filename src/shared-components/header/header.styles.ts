@@ -24,7 +24,7 @@ export const Wrapper = styled.header`
   ${media.greaterThan("medium")`
    background-image: url(${mediumBackground});
   .header-container {
-    max-width: 68.9rem;
+    /* max-width: 68.9rem; */
   }
   `}
   ${media.greaterThan("large")`

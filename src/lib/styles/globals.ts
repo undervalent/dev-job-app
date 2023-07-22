@@ -23,45 +23,40 @@ ${CSSReset}
   --dark-alpha: #19202d;
   --dark-bravo: #121721;
 
-  --logo-border-radius: 1.5rem;
-  --border-radius: .6rem;
+  --logo-border-radius: ${({ theme }) => theme.radius.xLarge};
+  --border-radius: ${({ theme }) => theme.radius.medium};
 }
   body {
-    background: ${({ theme }: GlobalThemeProps) => theme.background};
+    background: ${({ theme }) => theme.background};
     color: ${({ theme }: GlobalThemeProps) => theme.text};
     transition: background 0.2s ease-in, color 0.2s ease-in;
+    font-size: ${({ theme }) => theme.fontSize.fontSize2};
+    line-height: ${({ theme }) => theme.lineHeight.lineHeight3};
   }
 
 h1,
 h2,
 h3,
 h4 {
-  font-weight: 700;
-  color: ${({ theme }: GlobalThemeProps) => theme.headers};
-}
-h1,
-h2,
-h3,
-h4 {
-  font-weight: 700;
+  font-weight: ${({ theme }) => theme.fontWeight.bold};
   color: ${({ theme }: GlobalThemeProps) => theme.headers};
 }
 
 h1 {
-  font-size: 2.8rem;
-  line-height: 3.4rem;
+  font-size: ${({ theme }) => theme.fontSize.fontSize5};
+  line-height: ${({ theme }) => theme.lineHeight.lineHeight5};
 }
 h2 {
-  font-size: 2.4rem;
-  line-height: 2.9rem;
+  font-size: ${({ theme }) => theme.fontSize.fontSize4};
+  line-height: ${({ theme }) => theme.lineHeight.lineHeight4};
 }
 h3 {
-  font-size: 2rem;
-  line-height: 2.4rem;
+  font-size: ${({ theme }) => theme.fontSize.fontSize3};
+  line-height: ${({ theme }) => theme.lineHeight.lineHeight2};
 }
 h4 {
-  font-size: 1.4rem;
-  line-height: 1.8rem;
+  font-size: ${({ theme }) => theme.fontSize.fontSize1};
+  line-height: ${({ theme }) => theme.lineHeight.lineHeight1};
 }
 
 .visually-hidden {

@@ -47,8 +47,6 @@ export const Header = styled.header`
     margin-top: 3.3rem;
     margin-bottom: 1.3rem;
   }
-  .headline-wrapper {
-  }
   .company-link {
     font-size: 1.6rem;
     line-height: 1.6rem;
@@ -67,7 +65,7 @@ export const Header = styled.header`
         left: 0;
       }
       .headline-wrapper {
-        margin-left: 18rem;
+        margin-left: 14rem;
 
       }
       .selected-headline {

@@ -3,25 +3,28 @@ import media from "styled-media-query";
 
 export const Wrapper = styled.section`
   width: 100%;
+`;
 
-  .job-listings {
-    display: grid;
-    grid-row-gap: 4.9rem;
-    margin-top: 5.7rem;
-  }
+export const Listings = styled.div`
+  display: grid;
+  grid-row-gap: ${({ theme }) => theme.spacing.size12};
+  margin: ${({ theme }) => `${theme.spacing.size14} auto 0 auto`};
+  grid-column-gap: ${({ theme }) => theme.spacing.size8};
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 32.7rem));
+  justify-content: center;
 
   ${media.greaterThan("medium")`
-  .job-listings {
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 1.1rem;
-    margin-top: 7rem;
-  }
+    margin-top: ${({ theme }) => theme.spacing.size18};
   `}
+
   ${media.greaterThan("large")`
-  .job-listings {
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap: 3rem;
-    margin-top: 10.5rem;
-  }
+    margin-top: ${({ theme }) => theme.spacing.size100};
   `}
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: ${({ theme }) => `${theme.spacing.size8} 0`};
 `;

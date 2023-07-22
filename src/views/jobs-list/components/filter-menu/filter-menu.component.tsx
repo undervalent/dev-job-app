@@ -1,64 +1,43 @@
 import React from "react";
+import * as Styled from "./filter-menu.styles";
+import { Button, Checkbox } from "../../../../shared-components";
+import { MdLocationPin, MdSearch } from "react-icons/md";
+import { useTheme } from "styled-components";
+import { useFilterData } from "../../../../lib/hooks";
 
-import { Wrapper, SearchInput } from "./filter-menu.styles";
-import { Checkbox } from "../../../../shared-components";
-import { useAppDispatch, useAppSelector } from "../../../../state";
-import { SelectMenu } from "../select-menu";
-import {
-  toggleFullTime,
-  setSearchQuery,
-} from "../../../../state/features/filtered";
-import { useWindowSize } from "../../../../lib/hooks";
-function useFilterData(): [
-  {
-    searchQuery: string;
-    fullTime: boolean;
-    label: string;
-    isMobile: boolean;
-  },
-  {
-    handleSearch(e: React.ChangeEvent<HTMLInputElement>): void;
-    handleFullTime(): void;
-  }
-] {
-  const dispatch = useAppDispatch();
-
-  const { fullTime, searchQuery } = useAppSelector((state) => ({
-    fullTime: state.filter.fullTime,
-    searchQuery: state.filter.searchQuery,
-  }));
-  const { width } = useWindowSize();
-  const handlers = React.useMemo(
-    () => ({
-      handleFullTime: () => dispatch(toggleFullTime()),
-      handleSearch: (e: React.ChangeEvent<HTMLInputElement>) =>
-        dispatch(setSearchQuery(e.target.value)),
-    }),
-    [dispatch]
-  );
-  const mobile = !!width && width <= 1024;
-
-  const state = {
-    fullTime,
-    searchQuery,
-    label: mobile ? "Full Time" : "Full Time Only",
-    isMobile: mobile,
-  };
-  return [state, handlers];
-}
-
+import { Input } from "../../../../shared-components/input";
 export const FilterMenu = () => {
-  const [{ searchQuery, fullTime, label }, { handleSearch, handleFullTime }] =
-    useFilterData();
+  const theme: any = useTheme();
+  const [
+    { searchQuery, fullTime, labels, locationQuery },
+    { handleSearch, handleFullTime, handleLocation, handleFilter },
+  ] = useFilterData();
   return (
-    <Wrapper>
-      <SearchInput type="search" onChange={handleSearch} value={searchQuery} />
-      <SelectMenu />
-      <Checkbox
-        label={label}
-        isSelected={fullTime}
-        onCheckboxChange={handleFullTime}
+    <Styled.Wrapper>
+      <Input
+        icon={<MdSearch size="30px" color={theme?.colors?.violet} />}
+        type="search"
+        onChange={handleSearch}
+        value={searchQuery}
+        placeholder={labels.searchPlaceholder}
       />
-    </Wrapper>
+      <Input
+        type="text"
+        onChange={handleLocation}
+        value={locationQuery}
+        icon={<MdLocationPin size="30px" color={theme?.colors?.violet} />}
+        placeholder={labels.locationPlaceholder}
+      />
+      <Styled.MenuWrapper>
+        <Checkbox
+          label={labels.checkboxLabel}
+          isSelected={fullTime}
+          onCheckboxChange={handleFullTime}
+        />
+        <Button purpose="primary" onClick={handleFilter} width={48}>
+          Search
+        </Button>
+      </Styled.MenuWrapper>
+    </Styled.Wrapper>
   );
 };

@@ -27,7 +27,7 @@ export const CSSReset = css`
  */
 
   body {
-    font-family: "Kumbh Sans";
+    font-family: "Kumbh Sans", "sans-serif";
     margin: 0;
     font-size: 1.6rem;
     line-height: 2.6rem;
